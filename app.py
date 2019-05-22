@@ -3,10 +3,19 @@ from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 from validator_collection import validators, checkers
 import eventlet
+import sys
 
 # default values
-example_url = 'https://www.mlssoccer.com/players/brenden-aaronson'
+example_url = 'https://www.mlssoccer.com/players/mikey-ambrose'
 timeout_value = 3
+
+# main function
+def main():
+    try:
+        url=sys.argv[1]
+        get_img_url(url)
+    except:
+        get_img_url(example_url)
 
 # retrieve url of player's image given the url with the player's general information from the mlssoccer website
 def get_img_url(my_url):
@@ -41,4 +50,4 @@ def make_connection(my_url, timeout_input):
     uClient.close()
     return soup(page_html, "html.parser")
 
-get_img_url(example_url)
+main()
